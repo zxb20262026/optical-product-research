@@ -1,0 +1,152 @@
+{
+  "brand": "星微光学 Xingwei Optics",
+  "report_version": "v1.0",
+  "generated": "2026-06-10",
+  "data_sources": ["Amazon Best Sellers", "天猫", "京东", "行业报告"],
+  "categories": [
+    {
+      "id": 1,
+      "name": "显微观察",
+      "emoji": "🔬",
+      "status": "已有",
+      "priority": "P0",
+      "subcategories": [
+        {"name": "数码LCD显微镜", "price_range": "¥100-400", "ecommerce_score": 5, "top_brands": ["Elikliv", "TOMLOV", "Skybasic"]},
+        {"name": "WiFi无线显微镜", "price_range": "¥150-300", "ecommerce_score": 5, "top_brands": ["Skybasic", "TAKMLY"]},
+        {"name": "生物学生显微镜", "price_range": "¥300-2000", "ecommerce_score": 4, "top_brands": ["AmScope", "OMAX"]},
+        {"name": "体视显微镜", "price_range": "¥500-3000", "ecommerce_score": 3, "top_brands": ["AmScope", "Swift"]},
+        {"name": "儿童/教育显微镜", "price_range": "¥80-300", "ecommerce_score": 5, "top_brands": ["AmScope Kids", "National Geographic"]},
+        {"name": "金相/偏光显微镜", "price_range": "¥2000-10000+", "ecommerce_score": 2, "top_brands": ["AmScope", "Olympus"]},
+        {"name": "便携袖珍显微镜", "price_range": "¥30-80", "ecommerce_score": 5, "top_brands": ["Carson", "Jiusion"]}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "放大观察",
+      "emoji": "🔍",
+      "status": "已有",
+      "priority": "P0",
+      "subcategories": [
+        {"name": "手持放大镜", "price_range": "¥20-100", "ecommerce_score": 4, "top_brands": ["Eschenbach", "Bausch & Lomb"]},
+        {"name": "台式放大镜", "price_range": "¥150-500", "ecommerce_score": 4, "top_brands": ["Dazor", "Alvin"]},
+        {"name": "电子/数码放大镜", "price_range": "¥150-500", "ecommerce_score": 5, "top_brands": ["TOMLOV", "Walfront"]},
+        {"name": "珠宝放大镜(Loupe)", "price_range": "¥30-150", "ecommerce_score": 4, "top_brands": ["BelOMO", "Zeiss"]},
+        {"name": "头戴式放大镜", "price_range": "¥80-400", "ecommerce_score": 3, "top_brands": ["Donegan", "Yoctosun"]},
+        {"name": "阅读助视器", "price_range": "¥300-1500", "ecommerce_score": 4, "top_brands": ["HumanWare", "Eschenbach"]}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "望远观察",
+      "emoji": "🔭",
+      "status": "重点拓展",
+      "priority": "P0",
+      "subcategories": [
+        {"name": "双筒望远镜", "price_range": "¥100-1000", "ecommerce_score": 5, "top_brands": ["Occer", "Vortex", "Hontry"]},
+        {"name": "天文望远镜", "price_range": "¥500-5000", "ecommerce_score": 4, "top_brands": ["Gskyer", "Celticbird", "ZWO"]},
+        {"name": "观靶镜", "price_range": "¥500-3000", "ecommerce_score": 3, "top_brands": ["SVBONY", "Gosky", "Vortex"]},
+        {"name": "单筒望远镜", "price_range": "¥100-600", "ecommerce_score": 5, "top_brands": ["Vortex Solo", "Nocs"]},
+        {"name": "智能天文望远镜", "price_range": "¥3000-8000", "ecommerce_score": 4, "top_brands": ["ZWO", "Vaonis", "DwarfLab"]},
+        {"name": "儿童望远镜", "price_range": "¥30-100", "ecommerce_score": 5, "top_brands": ["GeoSafari", "Educational Insights"]}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "瞄准系统",
+      "emoji": "🎯",
+      "status": "谨慎评估",
+      "priority": "P2",
+      "subcategories": [
+        {"name": "步枪瞄准镜", "price_range": "¥200-2000", "ecommerce_score": 4, "top_brands": ["CVLIFE", "Vortex"]},
+        {"name": "红点瞄准镜", "price_range": "¥150-800", "ecommerce_score": 3, "top_brands": ["CVLIFE", "Sig Sauer"]},
+        {"name": "激光测距仪", "price_range": "¥300-2500", "ecommerce_score": 4, "top_brands": ["REVASRI", "Garmin", "Leupold"]},
+        {"name": "夜视仪/热成像", "price_range": "¥500-5000+", "ecommerce_score": 3, "top_brands": ["TELUHA", "TOPDON", "WOSPORTS"]}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "影像光学",
+      "emoji": "📷",
+      "status": "中期布局",
+      "priority": "P2",
+      "subcategories": [
+        {"name": "手机外接镜头", "price_range": "¥30-200", "ecommerce_score": 5, "top_brands": ["K&F Concept", "Apexel"]},
+        {"name": "UV/CPL/ND滤镜", "price_range": "¥20-300", "ecommerce_score": 4, "top_brands": ["K&F Concept", "NiSi"]},
+        {"name": "近摄接圈/增距镜", "price_range": "¥30-150", "ecommerce_score": 4, "top_brands": ["Meike", "Viltrox"]},
+        {"name": "镜头转接环", "price_range": "¥30-200", "ecommerce_score": 3, "top_brands": ["Fotodiox", "Urth"]}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "照明光学",
+      "emoji": "🔦",
+      "status": "推荐拓展",
+      "priority": "P1",
+      "subcategories": [
+        {"name": "EDC手电筒", "price_range": "¥50-500", "ecommerce_score": 5, "top_brands": ["OLIGHT", "Wurkkos"]},
+        {"name": "户外头灯", "price_range": "¥30-200", "ecommerce_score": 5, "top_brands": ["Petzl", "Black Diamond"]},
+        {"name": "USB充电手电筒", "price_range": "¥30-100", "ecommerce_score": 5, "top_brands": ["Victoper", "EverBrite"]},
+        {"name": "紫外/验钞灯", "price_range": "¥20-100", "ecommerce_score": 3, "top_brands": ["Alonefire", "Darkbeam"]},
+        {"name": "工作灯/摄影灯", "price_range": "¥80-400", "ecommerce_score": 3, "top_brands": ["Neewer", "Godox"]}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "内窥检测",
+      "emoji": "🩺",
+      "status": "中期布局",
+      "priority": "P2",
+      "subcategories": [
+        {"name": "工业管道镜", "price_range": "¥100-400", "ecommerce_score": 5, "top_brands": ["Kinpthy", "PAPIBLU", "Daxiongmao"]},
+        {"name": "双镜头内窥镜", "price_range": "¥150-500", "ecommerce_score": 4, "top_brands": ["Teslong", "DEPSTECH"]},
+        {"name": "无线WiFi内窥镜", "price_range": "¥100-350", "ecommerce_score": 5, "top_brands": ["NIDAGE", "BlueFire"]},
+        {"name": "医用/耳镜", "price_range": "¥100-300", "ecommerce_score": 3, "top_brands": ["Bebird", "Teslong"]}
+      ]
+    },
+    {
+      "id": 8,
+      "name": "检测测量",
+      "emoji": "📏",
+      "status": "远期布局",
+      "priority": "P3",
+      "subcategories": [
+        {"name": "激光测距仪", "price_range": "¥60-300", "ecommerce_score": 4, "top_brands": ["Bosch", "Mileseey"]},
+        {"name": "激光水平仪", "price_range": "¥80-500", "ecommerce_score": 4, "top_brands": ["Bosch", "Huepar"]},
+        {"name": "分光光度计", "price_range": "¥500-5000", "ecommerce_score": 2, "top_brands": ["Hach", "Thermo Fisher"]},
+        {"name": "折射仪/糖度计", "price_range": "¥30-200", "ecommerce_score": 3, "top_brands": ["Atago", "V-Tech"]}
+      ]
+    },
+    {
+      "id": 9,
+      "name": "光学防护",
+      "emoji": "👓",
+      "status": "推荐拓展",
+      "priority": "P1",
+      "subcategories": [
+        {"name": "防蓝光眼镜", "price_range": "¥30-200", "ecommerce_score": 5, "top_brands": ["JINS", "Zenni"]},
+        {"name": "工业安全护目镜", "price_range": "¥10-80", "ecommerce_score": 4, "top_brands": ["NoCry", "DeWalt"]},
+        {"name": "运动护目镜", "price_range": "¥50-300", "ecommerce_score": 4, "top_brands": ["Oakley", "Tifosi"]},
+        {"name": "焊接面罩/护目镜", "price_range": "¥50-300", "ecommerce_score": 3, "top_brands": ["Lincoln Electric", "YESWELDER"]}
+      ]
+    },
+    {
+      "id": 10,
+      "name": "光学配件",
+      "emoji": "⚙️",
+      "status": "配套策略",
+      "priority": "P1",
+      "subcategories": [
+        {"name": "显微镜配件", "price_range": "¥10-100", "ecommerce_score": 5, "top_brands": ["AmScope", "ZEEGOO"]},
+        {"name": "望远镜配件", "price_range": "¥20-200", "ecommerce_score": 5, "top_brands": ["SVBONY", "Celestron"]},
+        {"name": "光学清洁套装", "price_range": "¥10-80", "ecommerce_score": 5, "top_brands": ["Zeiss", "Nikon"]},
+        {"name": "光学元件", "price_range": "¥5-100", "ecommerce_score": 3, "top_brands": ["Edmund Optics", "Thorlabs"]},
+        {"name": "LED环形灯/补光灯", "price_range": "¥30-150", "ecommerce_score": 5, "top_brands": ["AmScope", "Neewer"]}
+      ]
+    }
+  ],
+  "roadmap": {
+    "phase1": {"period": "0-3月", "skus": "15-20个", "focus": ["显微镜升级(LCD/WiFi)", "望远镜(双筒+单筒)", "配件耗材体系"]},
+    "phase2": {"period": "3-6月", "skus": "30-40个", "focus": ["照明产品线(EDC手电+头灯)", "防护产品线(防蓝光眼镜)", "望远镜迭代(智能天文入门)"]},
+    "phase3": {"period": "6-12月", "skus": "50-80个", "focus": ["影像光学(手机镜头/滤镜)", "内窥检测", "激光测距", "跨境电商"]}
+  }
+}
