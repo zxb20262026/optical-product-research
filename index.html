@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星微光学 · 光学产品电商拓展调研报告</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --bg-card: #161b22;
+  --bg-card-hover: #1c2333;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-tertiary: #6e7681;
+  --accent: #58a6ff;
+  --accent2: #3fb950;
+  --accent3: #d2991d;
+  --accent4: #f78166;
+  --accent5: #a371f7;
+  --accent6: #79c0ff;
+  --danger: #f85149;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Navigation */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 20px;
+  overflow-x: auto;
+}
+.nav-brand {
+  font-weight: 700; font-size: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--accent5));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+.nav a {
+  color: var(--text-secondary); text-decoration: none; font-size: 13px;
+  white-space: nowrap; padding: 4px 10px; border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav a:hover { color: var(--text); background: var(--bg-card); }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+/* Hero */
+.hero {
+  text-align: center; padding: 60px 20px 40px;
+  background: linear-gradient(180deg, rgba(88,166,255,0.06) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+.hero h1 {
+  font-size: 36px; font-weight: 800; margin-bottom: 12px;
+  background: linear-gradient(135deg, #58a6ff, #a371f7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero .subtitle { color: var(--text-secondary); font-size: 18px; margin-bottom: 8px; }
+.hero .meta { color: var(--text-tertiary); font-size: 13px; }
+
+/* Executive Summary */
+.exec-summary {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px 32px; margin-bottom: 40px;
+}
+.exec-summary h2 { font-size: 20px; margin-bottom: 16px; color: var(--accent2); }
+.exec-summary .metrics {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px; margin-bottom: 20px;
+}
+.metric-card {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px;
+  text-align: center;
+}
+.metric-card .value { font-size: 24px; font-weight: 700; color: var(--accent); }
+.metric-card .label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+
+/* Section */
+.section-title {
+  font-size: 26px; font-weight: 700; margin: 48px 0 24px;
+  padding-bottom: 12px; border-bottom: 2px solid var(--accent);
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title .emoji { font-size: 30px; }
+
+/* Category Card */
+.cat-grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 20px; margin-bottom: 40px;
+}
+.cat-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 0;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.cat-card:hover { border-color: var(--accent); }
+.cat-header {
+  padding: 20px 28px;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer; user-select: none;
+}
+.cat-header .tag {
+  font-size: 12px; padding: 2px 10px; border-radius: 12px;
+  font-weight: 600; white-space: nowrap;
+}
+.tag-own { background: rgba(63,185,80,0.15); color: var(--accent2); }
+.tag-hot { background: rgba(248,81,73,0.15); color: var(--danger); }
+.tag-rec { background: rgba(163,113,247,0.15); color: var(--accent5); }
+.cat-header h3 { font-size: 18px; font-weight: 700; flex: 1; }
+.cat-header .arrow { color: var(--text-tertiary); transition: transform 0.3s; font-size: 14px; }
+.cat-card.open .cat-header .arrow { transform: rotate(180deg); }
+.cat-body { display: none; padding: 0 28px 24px; }
+.cat-card.open .cat-body { display: block; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+th {
+  text-align: left; padding: 10px 12px;
+  background: rgba(255,255,255,0.04); border-bottom: 2px solid var(--border);
+  color: var(--text-secondary); font-weight: 600; font-size: 12px;
+  text-transform: uppercase;
+}
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 600;
+}
+.badge-green { background: rgba(63,185,80,0.15); color: var(--accent2); }
+.badge-yellow { background: rgba(210,153,29,0.15); color: var(--accent3); }
+.badge-red { background: rgba(248,81,73,0.15); color: var(--danger); }
+.badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+
+.price-range { font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 12px;
+  color: var(--accent6); }
+
+/* Analysis box */
+.analysis-box {
+  background: rgba(88,166,255,0.04); border: 1px solid rgba(88,166,255,0.15);
+  border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 16px;
+}
+.analysis-box h4 { color: var(--accent); font-size: 14px; margin-bottom: 8px; }
+.analysis-box p, .analysis-box ul { font-size: 13px; color: var(--text-secondary); margin: 4px 0; }
+.analysis-box ul { padding-left: 18px; }
+.analysis-box li { margin: 3px 0; }
+
+/* Fit meter */
+.fit-meter {
+  display: flex; align-items: center; gap: 8px; margin: 8px 0;
+}
+.fit-meter .bar {
+  height: 6px; border-radius: 3px; background: var(--border);
+  flex: 1; overflow: hidden;
+}
+.fit-meter .fill { height: 100%; border-radius: 3px; }
+.fit-meter .score { font-size: 14px; font-weight: 700; min-width: 32px; text-align: right; }
+
+/* Priority grid */
+.priority-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px; margin: 24px 0;
+}
+.priority-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  border-left: 4px solid var(--accent2);
+}
+.priority-card.p2 { border-left-color: var(--accent3); }
+.priority-card.p3 { border-left-color: var(--accent5); }
+.priority-card h4 { font-size: 15px; margin-bottom: 8px; }
+.priority-card p { font-size: 13px; color: var(--text-secondary); }
+
+/* Footer */
+footer {
+  text-align: center; padding: 40px 20px; border-top: 1px solid var(--border);
+  margin-top: 60px; color: var(--text-tertiary); font-size: 13px;
+}
+footer a { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 20px 16px; }
+  .hero h1 { font-size: 24px; }
+  .cat-header { padding: 16px 20px; }
+  .cat-body { padding: 0 20px 20px; }
+  table { display: block; overflow-x: auto; }
+}
+
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--accent); color: #fff; border: none;
+  cursor: pointer; font-size: 20px; display: flex;
+  align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s; z-index: 99;
+}
+.scroll-top.visible { opacity: 1; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand">🔬 星微光学 · 电商拓展调研</div>
+  <a href="#summary">概览</a>
+  <a href="#cat1">🔬 显微观察</a>
+  <a href="#cat2">🔍 放大观察</a>
+  <a href="#cat3">🔭 望远观察</a>
+  <a href="#cat4">🎯 瞄准系统</a>
+  <a href="#cat5">📷 影像光学</a>
+  <a href="#cat6">🔦 照明光学</a>
+  <a href="#cat7">🩺 内窥检测</a>
+  <a href="#cat8">📏 检测测量</a>
+  <a href="#cat9">👓 光学防护</a>
+  <a href="#cat10">⚙️ 光学配件</a>
+  <a href="#priority">⭐ 优先级</a>
+</nav>
+
+<div class="hero">
+  <h1>星微光学 · 光学产品电商拓展调研</h1>
+  <p class="subtitle">10大赛道 × 60+细分品类 · 全维度电商适销分析</p>
+  <p class="meta">数据来源：Amazon Best Sellers / 天猫 / 京东 / 行业报告 · 2026年6月 · 品牌：星微光学 Xingwei Optics</p>
+</div>
+
+<div class="container">
+
+<!-- Executive Summary -->
+<section class="exec-summary" id="summary">
+  <h2>📊 执行摘要</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="value">10</div>
+      <div class="label">光学一级赛道</div>
+    </div>
+    <div class="metric-card">
+      <div class="value">60+</div>
+      <div class="label">细分品类</div>
+    </div>
+    <div class="metric-card">
+      <div class="value">¥100-500元</div>
+      <div class="label">电商黄金价格带</div>
+    </div>
+    <div class="metric-card">
+      <div class="value">~$350亿</div>
+      <div class="label">全球消费光学市场</div>
+    </div>
+    <div class="metric-card">
+      <div class="value">5个</div>
+      <div class="label">最高优先级赛道</div>
+    </div>
+  </div>
+  <p style="color:var(--text-secondary);font-size:14px;">
+    <strong>星微光学</strong>目前有<strong>显微镜 + 放大镜</strong>两大品类。基于电商数据，光学产品共可划分为<strong>10个一级赛道</strong>，其中<strong>5个最高优先级</strong>赛道与现有基因高度契合，可直接拓展。核心策略：<strong>以"微"（显微/放大）为原点 → 向外辐射"远"（望远）→ 再覆盖"应用场景"（户外照明/检测/防护）</strong>。
+  </p>
+</section>
+
+<!-- ==================== 1. 显微观察 ==================== -->
+<section id="cat1">
+<h2 class="section-title"><span class="emoji">🔬</span> 赛道一：显微观察（已有品类）</h2>
+
+<div class="cat-card open" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-own">已有</span>
+  <h3>显微镜 — 市场最大、品类最成熟</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th><th style="width:20%">Amazon Top 品牌</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>数码LCD显微镜</strong></td>
+  <td>自带屏幕，USB/HDMI输出，硬币/PCB/珠宝检测利器，2024最热品类</td>
+  <td class="price-range">¥100-400</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>Elikliv、TOMLOV、Skybasic</td>
+</tr>
+<tr>
+  <td><strong>WiFi无线显微镜</strong></td>
+  <td>手机APP连接，50-1000X，便携手持，教育/户外用</td>
+  <td class="price-range">¥150-300</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>Skybasic、TAKMLY</td>
+</tr>
+<tr>
+  <td><strong>生物学生显微镜</strong></td>
+  <td>传统光学结构，40X-2500X，教育/实验室主力，标本观察</td>
+  <td class="price-range">¥300-2000</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>AmScope、OMAX</td>
+</tr>
+<tr>
+  <td><strong>体视显微镜</strong></td>
+  <td>双目光路立体观察，PCB焊接/珠宝鉴定/电路维修</td>
+  <td class="price-range">¥500-3000</td>
+  <td><span class="badge badge-yellow">⭐3/5 中等</span></td>
+  <td>AmScope、Swift</td>
+</tr>
+<tr>
+  <td><strong>儿童/教育显微镜</strong></td>
+  <td>套装含标本片，简易操作，STEM教育送礼市场大</td>
+  <td class="price-range">¥80-300</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>AmScope Kids、National Geographic</td>
+</tr>
+<tr>
+  <td><strong>金相/偏光显微镜</strong></td>
+  <td>工业检测用，材料分析，专业市场小但客单价高</td>
+  <td class="price-range">¥2000-10000+</td>
+  <td><span class="badge badge-red">⭐2/5 偏专业</span></td>
+  <td>AmScope、Olympus</td>
+</tr>
+<tr>
+  <td><strong>便携袖珍显微镜</strong></td>
+  <td>钥匙扣大小，60-120X，户外植物/矿石观察，冲动消费型</td>
+  <td class="price-range">¥30-80</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>Carson、Jiusion</td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>显微镜是星微现有核心，<strong>数码LCD显微镜</strong>和<strong>WiFi无线显微镜</strong>是电商最热赛道，Amazon Top 5均在$14-$47区间，竞争激烈但市场大。建议：</p>
+  <ul>
+    <li><strong>主攻</strong>：数码LCD显微镜 ¥150-350区间，主打"硬币收藏+PCB检测"双场景</li>
+    <li><strong>差异化</strong>：WI-FI无线+APP联动，做内容营销（短视频展示微距世界）</li>
+    <li><strong>补充</strong>：儿童显微镜套装（STEM送礼市场），便携袖珍镜做低价引流</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 2. 放大观察 ==================== -->
+<section id="cat2">
+<h2 class="section-title"><span class="emoji">🔍</span> 赛道二：放大观察（已有品类）</h2>
+
+<div class="cat-card open" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-own">已有</span>
+  <h3>放大镜 — 基础品类，需往电子化升级</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th><th style="width:20%">代表品牌</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>手持放大镜</strong></td>
+  <td>传统光学镜片，3X-30X，阅读/鉴定/老年人主力，刚需品类</td>
+  <td class="price-range">¥20-100</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>Eschenbach、Bausch & Lomb</td>
+</tr>
+<tr>
+  <td><strong>台式放大镜</strong></td>
+  <td>带支架+环形灯，焊接/修表/手工，桌面固定场景</td>
+  <td class="price-range">¥150-500</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>Dazor、Alvin</td>
+</tr>
+<tr>
+  <td><strong>电子/数码放大镜</strong></td>
+  <td>带屏幕+SD卡拍照，2-4.3寸屏，阅读助视/电子维修</td>
+  <td class="price-range">¥150-500</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>TOMLOV、Walfront</td>
+</tr>
+<tr>
+  <td><strong>珠宝放大镜（Loupe）</strong></td>
+  <td>眼罩式，10X-30X三叠镜，珠宝/钟表鉴定，小巧便携</td>
+  <td class="price-range">¥30-150</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>BelOMO、Zeiss</td>
+</tr>
+<tr>
+  <td><strong>头戴式放大镜</strong></td>
+  <td>眼镜式+LED灯，双手自由，牙医/美容/精密维修</td>
+  <td class="price-range">¥80-400</td>
+  <td><span class="badge badge-yellow">⭐3/5 中等</span></td>
+  <td>Donegan、Yoctosun</td>
+</tr>
+<tr>
+  <td><strong>阅读助视器</strong></td>
+  <td>老年人/视障用户，大屏+高对比+多级放大，蓝海市场</td>
+  <td class="price-range">¥300-1500</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>HumanWare、Eschenbach</td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>放大镜是第二个已有品类。Amazon没有独立的Magnifiers Best Seller分类，说明<strong>品类认知分散</strong>，这正是机会点：</p>
+  <ul>
+    <li><strong>重点升级</strong>：从传统光学镜片 → <strong>电子/数码放大镜</strong>（带屏+拍照），这是增长最快方向</li>
+    <li><strong>场景化</strong>：珠宝鉴定套装、阅读助视器（银发经济）、台式工作放大镜三大场景</li>
+    <li><strong>内容营销</strong>：放大视野下的微观世界非常适合短视频传播</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 3. 望远观察 ==================== -->
+<section id="cat3">
+<h2 class="section-title"><span class="emoji">🔭</span> 赛道三：望远观察（重点拓展）</h2>
+
+<div class="cat-card open" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-rec">高优推荐</span>
+  <h3>望远镜 — 电商光学第一大品类，增长强劲</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th><th style="width:20%">Amazon Top 品牌</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>双筒望远镜</strong></td>
+  <td>8-12x42最主流，观鸟/旅行/户外/演唱会，最大子品类</td>
+  <td class="price-range">¥100-1000</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>Occer、Vortex、Hontry</td>
+</tr>
+<tr>
+  <td><strong>天文望远镜</strong></td>
+  <td>折射式/反射式，70-130mm口径，入门到中端市场大</td>
+  <td class="price-range">¥500-5000</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>Gskyer、Celticbird、ZWO</td>
+</tr>
+<tr>
+  <td><strong>观靶镜（Spotting Scope）</strong></td>
+  <td>20-60X变倍，射击/观鸟/户外，专业场景，客单价高</td>
+  <td class="price-range">¥500-3000</td>
+  <td><span class="badge badge-yellow">⭐3/5 中等</span></td>
+  <td>SVBONY、Gosky、Vortex</td>
+</tr>
+<tr>
+  <td><strong>单筒望远镜（Monocular）</strong></td>
+  <td>8-12x便携单筒，户外/旅行轻量选择，增长快</td>
+  <td class="price-range">¥100-600</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>Vortex Solo、Nocs</td>
+</tr>
+<tr>
+  <td><strong>智能天文望远镜</strong></td>
+  <td>APP控制+自动寻星+拍照，ZWO Seestar类，2024-25最热赛道</td>
+  <td class="price-range">¥3000-8000</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>ZWO、Vaonis、DwarfLab</td>
+</tr>
+<tr>
+  <td><strong>儿童望远镜</strong></td>
+  <td>4-6x低倍，耐摔防水，户外探索/送礼，低客单高周转</td>
+  <td class="price-range">¥30-100</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+  <td>GeoSafari、Educational Insights</td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p><strong>这是最优先拓展的赛道！</strong>望远镜是Amazon光学品类中独立分类最多、市场规模最大的方向。"星微"品牌名天然有"望远"暗示：</p>
+  <ul>
+    <li><strong>切入点</strong>：8-12x42双筒望远镜 ¥150-400（Amazon Top1 Occe 12x25约¥244）</li>
+    <li><strong>差异化</strong>：单筒便携望远镜作为"口袋望远镜"概念，强社交传播属性</li>
+    <li><strong>蓝海</strong>：儿童望远镜国内品牌极少，内容营销友好（开箱/测评）</li>
+    <li><strong>品牌延伸逻辑</strong>："显微镜看近 → 望远镜看远"，品牌叙事完美</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 4. 瞄准系统 ==================== -->
+<section id="cat4">
+<h2 class="section-title"><span class="emoji">🎯</span> 赛道四：瞄准系统（谨慎评估）</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-hot">高增长</span>
+  <h3>瞄准镜 — 美国市场巨大，国内受限</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th><th style="width:20%">Amazon Top 品牌</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>步枪瞄准镜（Rifle Scope）</strong></td>
+  <td>3-9x40最主流，狩猎/射击运动，Amazon Sports大类主力</td>
+  <td class="price-range">¥200-2000</td>
+  <td><span class="badge badge-yellow">⭐4/5 海外佳</span></td>
+  <td>CVLIFE、Vortex</td>
+</tr>
+<tr>
+  <td><strong>红点瞄准镜</strong></td>
+  <td>快速瞄准，手枪/近战，电子光学</td>
+  <td class="price-range">¥150-800</td>
+  <td><span class="badge badge-yellow">⭐3/5 海外</span></td>
+  <td>CVLIFE、Sig Sauer</td>
+</tr>
+<tr>
+  <td><strong>激光测距仪</strong></td>
+  <td>高尔夫/狩猎/工程多用，1000-1500码，独立大品类</td>
+  <td class="price-range">¥300-2500</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+  <td>REVASRI、Garmin、Leupold</td>
+</tr>
+<tr>
+  <td><strong>夜视仪/热成像</strong></td>
+  <td>数码夜视/红外热像，户外/安防/救援，高价蓝海</td>
+  <td class="price-range">¥500-5000+</td>
+  <td><span class="badge badge-yellow">⭐3/5 偏专业</span></td>
+  <td>TELUHA、TOPDON、WOSPORTS</td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>瞄准系统在Amazon是<strong>Sports & Outdoors大类下独立高流量赛道</strong>。CVLIFE（中国品牌）以$29-44价格带霸榜。但：</p>
+  <ul>
+    <li><strong>国内限制</strong>：瞄准镜/夜视仪有政策门槛，以跨境出海为主</li>
+    <li><strong>激光测距仪</strong>无政策限制，高尔夫/户外/工程多场景，更适合切入</li>
+    <li><strong>建议</strong>：若做跨境电商（Amazon/速卖通），瞄准镜是黄金赛道；纯国内电商则优先激光测距仪</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 5. 影像光学 ==================== -->
+<section id="cat5">
+<h2 class="section-title"><span class="emoji">📷</span> 赛道五：影像光学（高流量）</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-hot">高流量</span>
+  <h3>手机外接镜头 & 相机滤镜 — 内容创作者刚需</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>手机外接镜头</strong></td>
+  <td>广角/微距/鱼眼/长焦夹式镜头，短视频创作配件，高频消费</td>
+  <td class="price-range">¥30-200</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>UV/CPL/ND滤镜</strong></td>
+  <td>相机镜头保护+效果，口径37-82mm，标准化高复购</td>
+  <td class="price-range">¥20-300</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>近摄接圈/增距镜</strong></td>
+  <td>微距摄影扩展，低成本实现高倍率微距</td>
+  <td class="price-range">¥30-150</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>镜头转接环</strong></td>
+  <td>不同卡口转接，复古镜头/跨品牌使用</td>
+  <td class="price-range">¥30-200</td>
+  <td><span class="badge badge-yellow">⭐3/5 中等</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>影像光学与"光学"品牌基因高度关联。但竞争激烈（K&F Concept、NiSi等品牌成熟）。建议：</p>
+  <ul>
+    <li><strong>切入点</strong>：手机微距镜头+广角镜套装 ¥60-150，与显微镜用户重叠（微距爱好者）</li>
+    <li><strong>优势</strong>：星微的光学镀膜/镜片技术可复用</li>
+    <li><strong>内容红利</strong>：手机镜头评测是抖音/小红书热门内容</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 6. 照明光学 ==================== -->
+<section id="cat6">
+<h2 class="section-title"><span class="emoji">🔦</span> 赛道六：照明光学（高增长）</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-rec">推荐</span>
+  <h3>手电筒 & 头灯 — 户外照明刚需，万亿户外赛道入口</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>EDC手电筒</strong></td>
+  <td>随身小巧高流明，1000-3000lm，战术/日常携带，品牌溢价空间大</td>
+  <td class="price-range">¥50-500</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>户外头灯</strong></td>
+  <td>徒步/露营/夜跑，轻量+长续航+红光模式，运动场景</td>
+  <td class="price-range">¥30-200</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>USB充电手电筒</strong></td>
+  <td>多件装家庭应急，Victoper式多件装策略，走量</td>
+  <td class="price-range">¥30-100</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>紫外/验钞灯</strong></td>
+  <td>365nm UV，防伪检测/矿石荧光/宠物检测，小众高毛利</td>
+  <td class="price-range">¥20-100</td>
+  <td><span class="badge badge-yellow">⭐3/5 细分</span></td>
+</tr>
+<tr>
+  <td><strong>工作灯/摄影灯</strong></td>
+  <td>COB泛光，维修/摄影补光用，专业场景</td>
+  <td class="price-range">¥80-400</td>
+  <td><span class="badge badge-yellow">⭐3/5 中等</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>照明光学是<strong>"光学"品牌名最容易自然延伸的非传统品类</strong>。Amazon Flashlights Best Seller常年热卖，Victoper多件装策略霸榜：</p>
+  <ul>
+    <li><strong>切入点</strong>：EDC随身手电筒 ¥80-200，强调"光学透镜+高透光率"，用光学技术降维</li>
+    <li><strong>品牌逻辑</strong>："星微光学 → 精密光学透镜 → 高光效手电"叙事通顺</li>
+    <li><strong>套装策略</strong>：家庭应急多件装（参考Victoper 2-pack ¥67），走量引流</li>
+    <li><strong>户外场景</strong>：头灯结合"望远+照明"户外套装，提升客单价</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 7. 内窥检测 ==================== -->
+<section id="cat7">
+<h2 class="section-title"><span class="emoji">🩺</span> 赛道七：内窥检测</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-hot">热门增长</span>
+  <h3>工业内窥镜 — 蓝领工具赛道，增长迅猛</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>工业管道镜</strong></td>
+  <td>5-10m软管，HD摄像头+LED，汽车维修/管道检测，最热子品类</td>
+  <td class="price-range">¥100-400</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>双镜头内窥镜</strong></td>
+  <td>前置+侧视双摄像头，更全面检测，差异化竞争点</td>
+  <td class="price-range">¥150-500</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>无线WiFi内窥镜</strong></td>
+  <td>手机直连，便携，DIY/家庭用户友好</td>
+  <td class="price-range">¥100-350</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>医用/耳镜</strong></td>
+  <td>耳道检查，家庭健康，准医疗产品（需资质）</td>
+  <td class="price-range">¥100-300</td>
+  <td><span class="badge badge-yellow">⭐3/5 需资质</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>Amazon Borescopes品类竞争白热化，$20-$30区间中国品牌（Kinpthy/PAPIBLU/大熊猫）厮杀。但市场在快速增长：</p>
+  <ul>
+    <li><strong>切入点</strong>：WiFi+双镜头内窥镜 ¥150-300，差异化硬件配置</li>
+    <li><strong>品牌关联</strong>：内窥镜本质是"长焦微距摄像头"，与显微镜/放大镜技术同源</li>
+    <li><strong>内容场景</strong>：汽车DIY/管道检测/墙内探索，强视觉冲击力，YouTube/抖音爆款潜力</li>
+    <li><strong>⚠️注意</strong>：Amazon竞争极激烈，国内电商（汽修/五金工具类目）反而竞争相对温和</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 8. 检测测量 ==================== -->
+<section id="cat8">
+<h2 class="section-title"><span class="emoji">📏</span> 赛道八：检测测量</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-hot">高客单价</span>
+  <h3>激光测距 & 光学检测 — 工具类高价值赛道</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>激光测距仪</strong></td>
+  <td>40-100m，装修/测量/房地产标配，标准工具，复购低</td>
+  <td class="price-range">¥60-300</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>激光水平仪</strong></td>
+  <td>多线激光打线，装修/施工/挂画，专业+家用双场景</td>
+  <td class="price-range">¥80-500</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>分光光度计</strong></td>
+  <td>水质/溶液检测，实验室/水族，高价专业</td>
+  <td class="price-range">¥500-5000</td>
+  <td><span class="badge badge-red">⭐2/5 偏专业</span></td>
+</tr>
+<tr>
+  <td><strong>折射仪/糖度计</strong></td>
+  <td>水果甜度/冷却液冰点/海水盐度，小众但稳定</td>
+  <td class="price-range">¥30-200</td>
+  <td><span class="badge badge-yellow">⭐3/5 细分</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>激光测距仪/水平仪属于<strong>工具类目</strong>，品牌认知度要求较低，产品力更重要：</p>
+  <ul>
+    <li><strong>切入点</strong>：激光测距仪 ¥80-200，对标Bosch/Leica入门线但价格一半</li>
+    <li><strong>优势</strong>：精密光学调校能力可直接应用于激光准直</li>
+    <li><strong>场景</strong>：家居DIY/装修测量，小红书家装内容天然带货</li>
+    <li><strong>建议</strong>：中期布局，先做好显微+望远两大主线</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 9. 光学防护 ==================== -->
+<section id="cat9">
+<h2 class="section-title"><span class="emoji">👓</span> 赛道九：光学防护</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-rec">推荐</span>
+  <h3>防护眼镜 & 护目镜 — 低门槛高复购蓝海</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>防蓝光眼镜</strong></td>
+  <td>电脑办公防蓝光/防疲劳，都市白领刚需，天猫搜索量大</td>
+  <td class="price-range">¥30-200</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>工业安全护目镜</strong></td>
+  <td>ANSI认证，防雾防冲击，工厂/实验室/DIY</td>
+  <td class="price-range">¥10-80</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>运动护目镜</strong></td>
+  <td>篮球/骑行/滑雪场景，偏光防UV，时尚+功能</td>
+  <td class="price-range">¥50-300</td>
+  <td><span class="badge badge-green">⭐4/5 好</span></td>
+</tr>
+<tr>
+  <td><strong>焊接面罩/护目镜</strong></td>
+  <td>自动变光，焊接保护，工业专业场景</td>
+  <td class="price-range">¥50-300</td>
+  <td><span class="badge badge-yellow">⭐3/5 偏专业</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>光学防护是<strong>极低门槛 + 高频复购</strong>赛道。Amazon Safety Glasses品类Top1 NoCry仅$13，但Amazon品牌集中度极低：</p>
+  <ul>
+    <li><strong>切入点</strong>：防蓝光眼镜 ¥50-120（天猫搜索量超500万/月）</li>
+    <li><strong>品牌逻辑</strong>："星微光学镜片技术"天然适合做光学镀膜护目产品</li>
+    <li><strong>组合策略</strong>：实验室安全套装（护目镜+显微镜+放大镜），一单多品</li>
+    <li><strong>内容</strong>：办公族/电竞玩家防蓝光需求，评测+科普+带货三位一体</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 10. 光学配件 ==================== -->
+<section id="cat10">
+<h2 class="section-title"><span class="emoji">⚙️</span> 赛道十：光学配件</h2>
+
+<div class="cat-card" onclick="this.classList.toggle('open')">
+<div class="cat-header">
+  <span class="tag tag-hot">配套利润</span>
+  <h3>光学配件 — 高毛利长尾品类</h3>
+  <span class="arrow">▼</span>
+</div>
+<div class="cat-body">
+<table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>显微镜配件</strong></td>
+  <td>目镜/物镜/载玻片/盖玻片/标本片，复购率极高的耗材</td>
+  <td class="price-range">¥10-100</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>望远镜配件</strong></td>
+  <td>三脚架/手机支架/目镜/背包，与主体产品强关联</td>
+  <td class="price-range">¥20-200</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>光学清洁套装</strong></td>
+  <td>拭镜纸/气吹/清洁液/擦镜布，通用耗材，高复购</td>
+  <td class="price-range">¥10-80</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+<tr>
+  <td><strong>光学元件</strong></td>
+  <td>透镜/棱镜/反光镜/分光镜，DIY/创客/教育市场</td>
+  <td class="price-range">¥5-100</td>
+  <td><span class="badge badge-yellow">⭐3/5 细分</span></td>
+</tr>
+<tr>
+  <td><strong>LED环形灯/补光灯</strong></td>
+  <td>显微镜/放大镜配件，环形LED，常与主体连带销售</td>
+  <td class="price-range">¥30-150</td>
+  <td><span class="badge badge-green">⭐5/5 极佳</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学适配建议</h4>
+  <p>光学配件是<strong>提升客单价和复购率</strong>的核心策略。Amazon实验室显微镜品类Top 5有3个是配件（载玻片）：</p>
+  <ul>
+    <li><strong>策略</strong>：每个主力产品必须有2-3个配件SKU做连带销售</li>
+    <li><strong>耗材思维</strong>：载玻片/清洁套装/标本片 → 订阅式复购</li>
+    <li><strong>内容</strong>：手机拍摄支架（望远镜+手机=长焦摄影），短视频爆款道具</li>
+  </ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ==================== 优先级推荐 ==================== -->
+<section id="priority">
+<h2 class="section-title"><span class="emoji">⭐</span> 优先级推荐 & 拓展路线图</h2>
+
+<h3 style="color:var(--text-secondary);margin:20px 0 16px;font-size:16px;">
+  综合"品牌契合度 × 电商适销性 × 竞争格局 × 利润空间"四维度评分
+</h3>
+
+<div class="priority-grid">
+  <div class="priority-card">
+    <h4>🥇 P0：望远镜（立即启动）</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:95%;background:var(--accent2)"></div></div>
+      <span class="score" style="color:var(--accent2)">9.5</span>
+    </div>
+    <p>品牌名完美契合，品类认知清晰，Amazon 5个独立子分类，双筒/单筒/儿童三线并行</p>
+  </div>
+
+  <div class="priority-card">
+    <h4>🥇 P0：数码显微镜升级</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:98%;background:var(--accent2)"></div></div>
+      <span class="score" style="color:var(--accent2)">9.8</span>
+    </div>
+    <p>现有品类直接升级到LCD/WiFi数码显微镜，增加高端线+耗材配件</p>
+  </div>
+
+  <div class="priority-card p2">
+    <h4>🥈 P1：照明光学（3个月后）</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:82%;background:var(--accent3)"></div></div>
+      <span class="score" style="color:var(--accent3)">8.2</span>
+    </div>
+    <p>EDC手电筒+头灯，户外大品类引流，光学透镜技术降维，品牌延伸自然</p>
+  </div>
+
+  <div class="priority-card p2">
+    <h4>🥈 P1：光学防护（3个月后）</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:80%;background:var(--accent3)"></div></div>
+      <span class="score" style="color:var(--accent3)">8.0</span>
+    </div>
+    <p>防蓝光眼镜为主力，低门槛高复购，与显微镜/望远镜可组合套装</p>
+  </div>
+
+  <div class="priority-card p3">
+    <h4>🥉 P2：影像光学（6个月后）</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:75%;background:var(--accent5)"></div></div>
+      <span class="score" style="color:var(--accent5)">7.5</span>
+    </div>
+    <p>手机外接镜头+滤镜，光学镀膜技术复用，短视频内容红利</p>
+  </div>
+
+  <div class="priority-card p3">
+    <h4>🥉 P2：内窥检测（6个月后）</h4>
+    <div class="fit-meter">
+      <span style="font-size:12px;color:var(--text-secondary)">契合度</span>
+      <div class="bar"><div class="fill" style="width:72%;background:var(--accent5)"></div></div>
+      <span class="score" style="color:var(--accent5)">7.2</span>
+    </div>
+    <p>工业和DIY内窥镜，技术同源但竞争激烈，需差异化硬件</p>
+  </div>
+</div>
+
+<h3 style="margin-top:32px;color:var(--accent2);">🗺️ 拓展路线图</h3>
+<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;">
+  <div style="flex:1;min-width:200px;background:var(--bg-card);border:1px solid var(--accent2);border-radius:var(--radius);padding:20px;">
+    <h4 style="color:var(--accent2);margin-bottom:8px;">第一阶段（0-3月）</h4>
+    <p style="font-size:13px;color:var(--text-secondary);">
+      升级显微镜产品线（LCD/WiFi）<br>
+      新开望远镜产品线（双筒+单筒）<br>
+      配件耗材体系搭建<br>
+      <strong>目标SKU：15-20个</strong>
+    </p>
+  </div>
+  <div style="flex:1;min-width:200px;background:var(--bg-card);border:1px solid var(--accent3);border-radius:var(--radius);padding:20px;">
+    <h4 style="color:var(--accent3);margin-bottom:8px;">第二阶段（3-6月）</h4>
+    <p style="font-size:13px;color:var(--text-secondary);">
+      上线照明产品线（EDC手电+头灯）<br>
+      上线防护产品线（防蓝光眼镜）<br>
+      望远镜新品迭代（智能天文入门）<br>
+      <strong>目标SKU：30-40个</strong>
+    </p>
+  </div>
+  <div style="flex:1;min-width:200px;background:var(--bg-card);border:1px solid var(--accent5);border-radius:var(--radius);padding:20px;">
+    <h4 style="color:var(--accent5);margin-bottom:8px;">第三阶段（6-12月）</h4>
+    <p style="font-size:13px;color:var(--text-secondary);">
+      影像光学（手机镜头+滤镜）<br>
+      内窥检测产品线<br>
+      激光测距工具线<br>
+      跨境电商（Amazon/速卖通）<br>
+      <strong>目标SKU：50-80个</strong>
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ==================== 数据附录 ==================== -->
+<section style="margin-top:48px;">
+<h2 class="section-title"><span class="emoji">📊</span> 数据附录</h2>
+
+<h3 style="color:var(--text-secondary);margin:16px 0;">Amazon Best Sellers 光学品类价格分布（2026年6月）</h3>
+<table style="font-size:12px;">
+<thead><tr><th>品类</th><th>低价位($)</th><th>中位价($)</th><th>高价位($)</th><th>核心竞争区间</th><th>品牌集中度</th></tr></thead>
+<tbody>
+<tr><td>Microscopes (Consumer)</td><td>$14</td><td>$30</td><td>$47</td><td>$20-35</td><td>中高（Elikliv/TOMLOV双雄）</td></tr>
+<tr><td>Telescopes</td><td>$68</td><td>$91</td><td>$589</td><td>$70-100</td><td>低（品牌分散）</td></tr>
+<tr><td>Binoculars</td><td>$15</td><td>$34</td><td>$139</td><td>$15-35</td><td>低（Occe领跑）</td></tr>
+<tr><td>Spotting Scopes</td><td>$51</td><td>$118</td><td>$280</td><td>$50-150</td><td>中（SVBONY/Gosky/Vortex）</td></tr>
+<tr><td>Monoculars</td><td>$23</td><td>$56</td><td>$121</td><td>$25-75</td><td>低</td></tr>
+<tr><td>Rifle Scopes</td><td>$29</td><td>$93</td><td>$184</td><td>$30-120</td><td>中（Vortex 3/5霸榜）</td></tr>
+<tr><td>Laser Rangefinders</td><td>$42</td><td>$75</td><td>$327</td><td>$40-80</td><td>中</td></tr>
+<tr><td>Borescopes (Industrial)</td><td>$20</td><td>$24</td><td>$112</td><td>$20-30</td><td>极低（中国品牌混战）</td></tr>
+<tr><td>Safety Glasses</td><td>$6</td><td>$9</td><td>$13</td><td>$5-15</td><td>极低</td></tr>
+<tr><td>Flashlights</td><td>$9</td><td>$14</td><td>$122</td><td>$10-25</td><td>低</td></tr>
+<tr><td>Night Vision</td><td>$37</td><td>$84</td><td>$384</td><td>$40-150</td><td>低</td></tr>
+<tr><td>Camera Lenses</td><td>$21</td><td>$61</td><td>$219</td><td>$20-220</td><td>极高（Canon主导）</td></tr>
+</tbody>
+</table>
+
+<p style="margin-top:24px;color:var(--text-tertiary);font-size:12px;">
+  * 数据来源：Amazon.com Best Sellers (2026-06) · 汇率按 1 USD ≈ 7.25 CNY<br>
+  * 本报告中"待验证"数据标注为基于行业认知估算，建议通过天猫生意参谋/京东商智进一步验证<br>
+  * 报告版本：v1.0 · 生成日期：2026年6月10日
+</p>
+</section>
+
+</div>
+
+<footer>
+  <p>🔬 星微光学 · 光学产品电商拓展调研报告</p>
+  <p style="margin-top:8px;">
+    <a href="https://github.com/zxb20262026/optical-product-research" target="_blank">GitHub</a> ·
+    Made with ⚡️ by 小马哥
+  </p>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Scroll to top button
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 400);
+});
+
+// Expand first few cards by default
+document.querySelectorAll('.cat-card').forEach((card, i) => {
+  if (i <= 2) card.classList.add('open');
+});
+
+// Smooth nav scroll
+document.querySelectorAll('.nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const id = link.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
