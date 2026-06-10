@@ -32,83 +32,142 @@ body {
 .nav a:hover { color: var(--text); background: var(--bg-card); }
 .nav a.active { color: var(--accent); background: rgba(88,166,255,0.1); }
 .nav .sep { color: var(--border); margin: 0 2px; font-size: 10px; }
-.container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
-.hero {
-  text-align: center; padding: 40px 20px 30px;
-  background: linear-gradient(180deg, rgba(88,166,255,0.06) 0%, transparent 100%);
-  border-bottom: 1px solid var(--border); margin-bottom: 32px;
+.container { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+.page-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.page-title .emoji { font-size: 32px; }
+.page-desc { color: var(--text-secondary); font-size: 15px; margin-bottom: 32px; }
+
+/* Summary Banner */
+.summary-banner {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 32px;
 }
-.hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px;
-  background: linear-gradient(135deg, #58a6ff, #a371f7);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero .subtitle { color: var(--text-secondary); font-size: 15px; }
-.page-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
-.page-title .emoji { font-size: 28px; }
-.page-tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 600; }
-.tag-own { background: rgba(63,185,80,0.15); color: var(--accent2); }
+.summary-item {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px; text-align: center;
+}
+.summary-item .val { font-size: 22px; font-weight: 700; }
+.summary-item .lab { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+/* Sub-category section */
+.sub-cat-section {
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.sub-cat-header {
+  padding: 18px 24px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+.sub-cat-header:hover { background: rgba(255,255,255,0.02); }
+.sub-cat-section.open .sub-cat-header { border-bottom-color: var(--border); }
+.sub-cat-header .idx { 
+  font-size: 20px; font-weight: 800; color: var(--accent);
+  min-width: 28px; text-align: center;
+}
+.sub-cat-header h3 { font-size: 17px; font-weight: 700; flex: 1; }
+.sub-cat-header .arrow { color: var(--text-tertiary); transition: transform 0.3s; }
+.sub-cat-section.open .sub-cat-header .arrow { transform: rotate(180deg); }
+.sub-cat-body { display: none; padding: 0 24px 20px; }
+.sub-cat-section.open .sub-cat-body { display: block; }
+
+.tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 600; white-space: nowrap; }
 .tag-hot { background: rgba(248,81,73,0.15); color: var(--danger); }
-.tag-rec { background: rgba(163,113,247,0.15); color: var(--accent5); }
-.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.tag-mid { background: rgba(210,153,29,0.15); color: var(--accent3); }
+.tag-low { background: rgba(110,118,129,0.15); color: var(--text-tertiary); }
+.tag-new { background: rgba(163,113,247,0.15); color: var(--accent5); }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th {
+  text-align: left; padding: 10px 12px;
+  background: rgba(255,255,255,0.04); border-bottom: 2px solid var(--border);
+  color: var(--text-secondary); font-weight: 600; font-size: 11px;
+  text-transform: uppercase; white-space: nowrap;
+}
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+tr.param-row td { font-size: 12px; color: var(--text-secondary); background: rgba(255,255,255,0.01); }
+tr.param-row:hover td { background: rgba(255,255,255,0.03); }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 600;
+}
 .badge-green { background: rgba(63,185,80,0.15); color: var(--accent2); }
 .badge-yellow { background: rgba(210,153,29,0.15); color: var(--accent3); }
 .badge-red { background: rgba(248,81,73,0.15); color: var(--danger); }
 .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
-.price-range { font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 12px; color: var(--accent6); }
-.analysis-box { background: rgba(88,166,255,0.04); border: 1px solid rgba(88,166,255,0.15); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 20px; }
+
+.price-range { font-family: 'SF Mono', monospace; font-size: 12px; color: var(--accent6); white-space: nowrap; }
+
+.volume-bar {
+  display: flex; align-items: center; gap: 6px;
+}
+.volume-bar .vbar {
+  height: 4px; border-radius: 2px; background: var(--border);
+  width: 60px; overflow: hidden;
+}
+.volume-bar .vfill { height: 100%; border-radius: 2px; }
+.volume-bar .vlabel { font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
+
+/* Analysis box */
+.analysis-box {
+  background: rgba(88,166,255,0.04); border: 1px solid rgba(88,166,255,0.15);
+  border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 16px;
+}
 .analysis-box h4 { color: var(--accent); font-size: 14px; margin-bottom: 8px; }
 .analysis-box p, .analysis-box ul { font-size: 13px; color: var(--text-secondary); margin: 4px 0; }
 .analysis-box ul { padding-left: 18px; }
 .analysis-box li { margin: 3px 0; }
-table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13px; }
-th { text-align: left; padding: 10px 12px; background: rgba(255,255,255,0.04); border-bottom: 2px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 12px; text-transform: uppercase; }
-td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-tr:hover td { background: rgba(255,255,255,0.02); }
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin: 24px 0; }
-.card-link { display: block; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 16px; text-decoration: none; transition: all 0.2s; }
-.card-link:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-2px); }
-.card-link .card-emoji { font-size: 32px; margin-bottom: 8px; }
-.card-link .card-title { color: var(--text); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-.card-link .card-desc { color: var(--text-secondary); font-size: 12px; }
-.card-link .card-tag { margin-top: 8px; }
-.exec-summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 32px; }
-.exec-summary h2 { font-size: 18px; margin-bottom: 12px; color: var(--accent2); }
-.exec-summary p { font-size: 14px; color: var(--text-secondary); }
-.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
-.metric-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
-.metric-card .value { font-size: 22px; font-weight: 700; color: var(--accent); }
-.metric-card .label { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
-.priority-section { margin-top: 32px; }
-.priority-section h2 { font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.priority-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-.priority-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; border-left: 4px solid var(--accent2); }
-.priority-card.p2 { border-left-color: var(--accent3); }
-.priority-card.p3 { border-left-color: var(--accent5); }
-.priority-card h4 { font-size: 14px; margin-bottom: 6px; }
-.priority-card p { font-size: 13px; color: var(--text-secondary); }
-.fit-meter { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
-.fit-meter .bar { height: 5px; border-radius: 3px; background: var(--border); flex: 1; overflow: hidden; }
-.fit-meter .fill { height: 100%; border-radius: 3px; }
-.fit-meter .score { font-size: 13px; font-weight: 700; min-width: 28px; text-align: right; }
-.roadmap { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
-.roadmap-card { flex: 1; min-width: 200px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
-.roadmap-card h4 { font-size: 14px; margin-bottom: 8px; }
-.roadmap-card p { font-size: 12px; color: var(--text-secondary); }
-.roadmap-card.p1 { border-color: var(--accent2); }
-.roadmap-card.p2 { border-color: var(--accent3); }
-.roadmap-card.p3 { border-color: var(--accent5); }
+
+/* Params section */
+.params-callout {
+  background: rgba(163,113,247,0.06); border: 1px solid rgba(163,113,247,0.2);
+  border-radius: var(--radius-sm); padding: 12px 16px; margin: 10px 0;
+}
+.params-callout .p-title { font-size: 12px; color: var(--accent5); font-weight: 600; margin-bottom: 6px; }
+.params-callout .p-grid { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.params-callout .p-item { font-size: 12px; color: var(--text-secondary); }
+.params-callout .p-key { color: var(--text); font-weight: 500; }
+
+/* Strategy section */
+.strategy-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px; margin: 24px 0;
+}
+.strategy-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px;
+  border-left: 3px solid var(--accent);
+}
+.strategy-card h4 { font-size: 14px; margin-bottom: 8px; }
+.strategy-card p, .strategy-card ul { font-size: 12px; color: var(--text-secondary); }
+.strategy-card ul { padding-left: 16px; }
+.strategy-card li { margin: 2px 0; }
+
 footer { text-align: center; padding: 32px 20px; border-top: 1px solid var(--border); margin-top: 48px; color: var(--text-tertiary); font-size: 12px; }
 footer a { color: var(--accent); }
 .scroll-top { position: fixed; bottom: 24px; right: 24px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 99; }
 .scroll-top.visible { opacity: 1; }
-@media (max-width: 768px) { .container { padding: 16px 12px; } table { display: block; overflow-x: auto; } .card-grid { grid-template-columns: repeat(2, 1fr); } }
+.toc { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.toc a { padding: 4px 12px; border: 1px solid var(--border); border-radius: 16px; font-size: 12px; color: var(--text-secondary); text-decoration: none; transition: all 0.2s; }
+.toc a:hover { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,0.06); }
+@media (max-width: 768px) { .container { padding: 16px 12px; } table { display: block; overflow-x: auto; } }
 </style>
 </head>
 <body>
+
 <nav class="nav">
   <a href="index.html" class="nav-brand">🔬 星微光学 · 调研</a>
   <span class="sep">|</span>
   <a href="index.html">🏠 首页</a>
-  <a href="microscope.html">🔬显微</a>
+  <a href="microscope.html" class="active">🔬显微</a>
   <a href="magnifier.html">🔍放大</a>
   <a href="telescope.html">🔭望远</a>
   <a href="aiming.html">🎯瞄准</a>
@@ -119,40 +178,637 @@ footer a { color: var(--accent); }
   <a href="protection.html">👓防护</a>
   <a href="accessories.html">⚙️配件</a>
 </nav>
+
 <div class="container">
-  <div class="page-title">
-    <span class="emoji">🔬</span>
-    显微观察
-    <span class="page-tag tag-own">已有</span>
-  </div>
-  <p style="color:var(--text-secondary);font-size:15px;margin-bottom:24px;">显微镜 — 市场最大、品类最成熟</p>
-  <table>
-<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th><th style="width:20%">Amazon Top 品牌</th></tr></thead>
-<tbody>
-<tr><td><strong>数码LCD显微镜</strong></td><td>自带屏幕，USB/HDMI输出，硬币/PCB/珠宝检测利器，2024最热品类</td><td class="price-range">¥100-400</td><td><span class="badge badge-green">⭐5/5 极佳</span></td><td>Elikliv、TOMLOV、Skybasic</td></tr>
-<tr><td><strong>WiFi无线显微镜</strong></td><td>手机APP连接，50-1000X，便携手持，教育/户外用</td><td class="price-range">¥150-300</td><td><span class="badge badge-green">⭐5/5 极佳</span></td><td>Skybasic、TAKMLY</td></tr>
-<tr><td><strong>生物学生显微镜</strong></td><td>传统光学结构，40X-2500X，教育/实验室主力，标本观察</td><td class="price-range">¥300-2000</td><td><span class="badge badge-green">⭐4/5 好</span></td><td>AmScope、OMAX</td></tr>
-<tr><td><strong>体视显微镜</strong></td><td>双目光路立体观察，PCB焊接/珠宝鉴定/电路维修</td><td class="price-range">¥500-3000</td><td><span class="badge badge-yellow">⭐3/5 中等</span></td><td>AmScope、Swift</td></tr>
-<tr><td><strong>儿童/教育显微镜</strong></td><td>套装含标本片，简易操作，STEM教育送礼市场大</td><td class="price-range">¥80-300</td><td><span class="badge badge-green">⭐5/5 极佳</span></td><td>AmScope Kids、National Geographic</td></tr>
-<tr><td><strong>金相/偏光显微镜</strong></td><td>工业检测用，材料分析，专业市场小但客单价高</td><td class="price-range">¥2000-10000+</td><td><span class="badge badge-red">⭐2/5 偏专业</span></td><td>AmScope、Olympus</td></tr>
-<tr><td><strong>便携袖珍显微镜</strong></td><td>钥匙扣大小，60-120X，户外植物/矿石观察，冲动消费型</td><td class="price-range">¥30-80</td><td><span class="badge badge-green">⭐5/5 极佳</span></td><td>Carson、Jiusion</td></tr>
-</tbody></table>
-<div class="analysis-box"><h4>🎯 星微光学适配建议</h4><p>显微镜是星微现有核心，<strong>数码LCD显微镜</strong>和<strong>WiFi无线显微镜</strong>是电商最热赛道，Amazon Top 5均在$14-$47区间，竞争激烈但市场大。建议：</p><ul><li><strong>主攻</strong>：数码LCD显微镜 ¥150-350区间，主打"硬币收藏+PCB检测"双场景</li><li><strong>差异化</strong>：WI-FI无线+APP联动，做内容营销（短视频展示微距世界）</li><li><strong>补充</strong>：儿童显微镜套装（STEM送礼市场），便携袖珍镜做低价引流</li></ul></div>
+
+<div class="page-title">
+  <span class="emoji">🔬</span> 显微观察
+  <span class="tag tag-hot" style="font-size:14px;">已有品类 · 深度下钻</span>
 </div>
+<p class="page-desc">显微镜是星微光学现有核心品类。本页对7个细分品类进行<strong>二级参数化细分</strong>，以产品核心参数为维度拆解，并标注市场体量参考（搜索指数+电商GMV估算）。</p>
+
+<!-- Summary Banner -->
+<div class="summary-banner">
+  <div class="summary-item"><div class="val" style="color:var(--accent2);">25-40亿/年</div><div class="lab">天猫+京东显微镜GMV</div></div>
+  <div class="summary-item"><div class="val" style="color:var(--accent);">50万+/月</div><div class="lab">头部品类月搜索量</div></div>
+  <div class="summary-item"><div class="val" style="color:var(--accent3);">7</div><div class="lab">一级细分品类</div></div>
+  <div class="summary-item"><div class="val" style="color:var(--accent5);">22</div><div class="lab">二级参数子类</div></div>
+  <div class="summary-item"><div class="val" style="color:var(--accent6);">¥80-600</div><div class="lab">消费级黄金价格带</div></div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+  <span style="font-size:12px;color:var(--text-tertiary);padding:4px 0;">快速跳转：</span>
+  <a href="#sub1">1.数码LCD</a>
+  <a href="#sub2">2.WiFi无线</a>
+  <a href="#sub3">3.生物学生</a>
+  <a href="#sub4">4.体视镜</a>
+  <a href="#sub5">5.儿童教育</a>
+  <a href="#sub6">6.金相偏光</a>
+  <a href="#sub7">7.便携袖珍</a>
+  <a href="#strategy">⭐拓展策略</a>
+</div>
+
+<!-- ==================== 1. 数码LCD显微镜 ==================== -->
+<div class="sub-cat-section open" id="sub1">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">1</div>
+  <h3>数码LCD显微镜</h3>
+  <span class="tag tag-hot">高热 · 月搜40万+</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">屏幕尺寸</span>：2.0" / 2.8" / 3.5" / 4.3" / 7.0"</span>
+    <span class="p-item"><span class="p-key">放大倍数</span>：500X / 1000X / 1200X / 1600X</span>
+    <span class="p-item"><span class="p-key">分辨率</span>：200万 / 500万 / 1200万像素</span>
+    <span class="p-item"><span class="p-key">输出接口</span>：仅屏幕 / USB / HDMI</span>
+    <span class="p-item"><span class="p-key">传感器</span>：CMOS尺寸(1/4"-1/2.3")</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类（参数组合）</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>便携入门级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">玩具级/家庭轻度使用</span></td>
+  <td>2.0-2.8"屏 · 500-800X<br>200万像素 · USB输出</td>
+  <td class="price-range">¥80-180</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:70%;background:var(--accent2)"></div></div><span class="vlabel">月搜 8-12万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 1-1.5亿/年</span>
+  </td>
+  <td>TAKMLY、Jiusion、白牌</td>
+</tr>
+<tr>
+  <td><strong>主流4.3寸级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">硬币收藏/PCB维修主力</span></td>
+  <td>4.3"屏 · 1000X<br>500万像素 · USB+HDMI</td>
+  <td class="price-range">¥150-400</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:100%;background:var(--danger)"></div></div><span class="vlabel">月搜 15-20万 🔥</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 2-3亿/年</span>
+  </td>
+  <td><strong>Elikliv</strong>、<strong>TOMLOV</strong>、Skybasic</td>
+</tr>
+<tr>
+  <td><strong>专业大屏级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">实验室/教学演示</span></td>
+  <td>7.0"屏 · 1200-1600X<br>1200万像素 · HDMI+SD</td>
+  <td class="price-range">¥400-1200</td>
+  <td><span class="badge badge-yellow">⭐3/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:30%;background:var(--accent3)"></div></div><span class="vlabel">月搜 2-4万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 0.5-1亿/年</span>
+  </td>
+  <td>Andonstar、Dino-Lite</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>主力SKU</strong>：4.3"屏·1000X·500万像素，定价 ¥189-269（对标Elikliv ¥225），这是绝对主战场</li>
+    <li><strong>差异化</strong>：标配HDMI输出+SD卡拍照，区别于仅USB的白牌；强化"硬币收藏模式"预设</li>
+    <li><strong>引流SKU</strong>：2.8"入门级 ¥99-129，作为店铺引流款</li>
+    <li><strong>内容营销</strong>：4.3"屏是Amazon Top1品类，短视频展示"硬币微距""PCB焊接"效果极佳</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 2. WiFi无线显微镜 ==================== -->
+<div class="sub-cat-section" id="sub2">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">2</div>
+  <h3>WiFi无线显微镜</h3>
+  <span class="tag tag-new">新兴蓝海 · 月搜1-2万</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">连接方式</span>：纯WiFi / WiFi+USB双模 / 蓝牙辅助</span>
+    <span class="p-item"><span class="p-key">放大倍数</span>：50-500X / 50-1000X</span>
+    <span class="p-item"><span class="p-key">APP功能</span>：仅查看 / 拍照录像 / AI测量</span>
+    <span class="p-item"><span class="p-key">供电</span>：内置电池 / USB供电 / 可更换</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>WiFi直连型</strong><br><span style="font-size:11px;color:var(--text-tertiary);">手机平板查看</span></td>
+  <td>2.4G WiFi · 50-1000X<br>手机APP · 内置电池</td>
+  <td class="price-range">¥150-350</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:25%;background:var(--accent5)"></div></div><span class="vlabel">月搜 0.8-1.5万 🚀</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 0.3-0.6亿/年 · 增速>50%</span>
+  </td>
+  <td>Skybasic、TAKMLY</td>
+</tr>
+<tr>
+  <td><strong>双模连接型</strong><br><span style="font-size:11px;color:var(--text-tertiary);">手机+PC多端</span></td>
+  <td>WiFi+USB · 50-1000X<br>多平台APP · 拍照录像</td>
+  <td class="price-range">¥200-500</td>
+  <td><span class="badge badge-green">⭐4/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:20%;background:var(--accent5)"></div></div><span class="vlabel">月搜 0.5-1万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.2-0.4亿/年</span>
+  </td>
+  <td>Jiusion、Wirelessgo</td>
+</tr>
+<tr>
+  <td><strong>AI智能型</strong><br><span style="font-size:11px;color:var(--text-tertiary);">自动测量/识别</span></td>
+  <td>WiFi+AI算法 · 500-1000X<br>自动测距/面积/计数</td>
+  <td class="price-range">¥400-1000</td>
+  <td><span class="badge badge-yellow">⭐3/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:10%;background:var(--accent5)"></div></div><span class="vlabel">月搜 <0.5万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">新兴赛道，格局未定</span>
+  </td>
+  <td>Dino-Lite、少数品牌</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>核心策略</strong>：WiFi无线显微镜是增速最快的蓝海（年增>50%），竞争格局未定，<strong>现在入场窗口极佳</strong></li>
+    <li><strong>切入点</strong>：WiFi直连型 ¥169-259，主打"手机秒变显微镜"，强调App体验流畅度</li>
+    <li><strong>差异化</strong>：APP内置"硬币鉴定/PCB检测/植物观察"三种场景模式，一键切换曝光参数</li>
+    <li><strong>推荐</strong>：与数码LCD显微镜形成"有线+无线"双线产品矩阵</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 3. 生物学生显微镜 ==================== -->
+<div class="sub-cat-section" id="sub3">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">3</div>
+  <h3>生物学生显微镜</h3>
+  <span class="tag tag-hot">最热品类 · 月搜50万+ 🔥</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">放大倍数</span>：40-400X / 40-1000X / 40-1600X / 40-2000X</span>
+    <span class="p-item"><span class="p-key">目镜</span>：单目 / 双目 / 三目（可接相机）</span>
+    <span class="p-item"><span class="p-key">光源</span>：LED（入门）/ 卤素灯（专业）/ 上下双光源</span>
+    <span class="p-item"><span class="p-key">物镜</span>：消色差 / 平场消色差 / 半复消色差</span>
+    <span class="p-item"><span class="p-key">载物台</span>：固定式 / 双层机械移动式</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>入门教学级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">小学/家庭启蒙</span></td>
+  <td>40-400X · 单目<br>LED光源 · 固定载物台</td>
+  <td class="price-range">¥80-300</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:60%;background:var(--accent)"></div></div><span class="vlabel">月搜 10-15万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 1.5-2.5亿/年</span>
+  </td>
+  <td>凤凰、得力、晨光</td>
+</tr>
+<tr>
+  <td><strong>标准学生级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">初中生物/中考备考主力</span></td>
+  <td>40-1000X · 单/双目<br>LED+聚光镜 · 机械载物台</td>
+  <td class="price-range">¥300-800</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:100%;background:var(--danger)"></div></div><span class="vlabel">月搜 20-25万 🔥🔥</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV估算: 4-6亿/年 · 全品类最大</span>
+  </td>
+  <td>凤凰、麦克奥迪、舜宇</td>
+</tr>
+<tr>
+  <td><strong>中考实验级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">初三备考/培训机构</span></td>
+  <td>40-1600X · 双目<br>LED+可调聚光 · 油镜</td>
+  <td class="price-range">¥600-1500</td>
+  <td><span class="badge badge-green">⭐4/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:50%;background:var(--accent3)"></div></div><span class="vlabel">月搜 5-8万（3-5月峰值）</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1-2亿/年 · 强季节性</span>
+  </td>
+  <td>麦克奥迪、永新光学</td>
+</tr>
+<tr>
+  <td><strong>专业实验室级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">高校/医院/科研</span></td>
+  <td>40-2000X · 三目<br>卤素灯+Köhler · 平场物镜</td>
+  <td class="price-range">¥2000-8000</td>
+  <td><span class="badge badge-red">⭐2/5 偏专业</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:15%;background:var(--text-tertiary)"></div></div><span class="vlabel">月搜 1-2万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.5-1亿/年 · 品牌壁垒高</span>
+  </td>
+  <td>奥林巴斯、蔡司、麦克奥迪</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>主战场</strong>：标准学生级（40-1000X·双目）¥350-600，这是25-40亿市场中最大的子品类</li>
+    <li><strong>关键卖点</strong>："中考实验同款配置"，3-5月旺季重点推广</li>
+    <li><strong>配套</strong>：标配标本片套装（洋葱表皮/人口腔上皮细胞等中考常见），提升客单价</li>
+    <li><strong>注意</strong>：凤凰/麦克奥迪品牌认知度高，需在"性价比+做工"上差异化，<strong>不建议血拼价格</strong></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 4. 体视显微镜 ==================== -->
+<div class="sub-cat-section" id="sub4">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">4</div>
+  <h3>体视显微镜（立体显微镜）</h3>
+  <span class="tag tag-mid">中热 · 月搜5万+</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">放大倍数</span>：7-45X(标准) / 7-90X(中端) / 3.5-180X(高端)</span>
+    <span class="p-item"><span class="p-key">变倍方式</span>：固定倍率 / 连续变倍(zoom)</span>
+    <span class="p-item"><span class="p-key">工作距离</span>：50mm / 100mm / 150mm+</span>
+    <span class="p-item"><span class="p-key">照明</span>：无灯 / 环形LED / 上下双光源</span>
+    <span class="p-item"><span class="p-key">目镜</span>：固定式双目 / 三目(可接相机)</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>工具维修级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">PCB焊接/珠宝修理</span></td>
+  <td>7-45X · 固定倍率/简易变倍<br>环形LED · 100mm工作距</td>
+  <td class="price-range">¥500-1500</td>
+  <td><span class="badge badge-green">⭐4/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:40%;background:var(--accent3)"></div></div><span class="vlabel">月搜 2-3万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1-1.5亿/年</span>
+  </td>
+  <td>AmScope、Swift、舜宇</td>
+</tr>
+<tr>
+  <td><strong>专业工作级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">电子维修/质检</span></td>
+  <td>7-45X · 连续变倍<br>上下双LED · 150mm工作距</td>
+  <td class="price-range">¥1500-4000</td>
+  <td><span class="badge badge-yellow">⭐3/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:35%;background:var(--accent3)"></div></div><span class="vlabel">月搜 1.5-2.5万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1.5-2.5亿/年</span>
+  </td>
+  <td>奥林巴斯、尼康、麦克奥迪</td>
+</tr>
+<tr>
+  <td><strong>三目摄影级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">显微摄影/教学</span></td>
+  <td>7-90X · 三目+相机接口<br>上下光源 · 大工作距</td>
+  <td class="price-range">¥3000-15000</td>
+  <td><span class="badge badge-red">⭐2/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:10%;background:var(--text-tertiary)"></div></div><span class="vlabel">月搜 0.3-0.8万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.5-1亿/年</span>
+  </td>
+  <td>徕卡、蔡司、永新光学</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>可切入</strong>：工具维修级 ¥600-1000，定位"电子维修/DIY玩家"</li>
+    <li><strong>差异化</strong>：标配环形LED+USB相机适配器，主打"买体视镜送电子目镜"</li>
+    <li><strong>场景定位</strong>：手机维修店、电子DIY爱好者、珠宝鉴定三大场景</li>
+    <li><strong>策略</strong>：初期以工具级切入，中期可升级到专业变倍款。客单价高(¥1500+)但体量有限，<strong>不宜作为第一优先级</strong></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 5. 儿童/教育显微镜 ==================== -->
+<div class="sub-cat-section" id="sub5">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">5</div>
+  <h3>儿童/教育显微镜</h3>
+  <span class="tag tag-hot">高热 · 月搜25万+</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">适用年龄</span>：3-6岁 / 6-10岁 / 10-14岁</span>
+    <span class="p-item"><span class="p-key">放大倍数</span>：100-400X / 40-600X / 40-1200X</span>
+    <span class="p-item"><span class="p-key">套装内容</span>：裸机 / 含标本片 / 含实验工具包</span>
+    <span class="p-item"><span class="p-key">材质</span>：全塑料(ABS) / 金属+塑料 / 全金属</span>
+    <span class="p-item"><span class="p-key">附加功能</span>：手机支架 / 投影 / LED照明</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>启蒙级（3-6岁）</strong><br><span style="font-size:11px;color:var(--text-tertiary);">幼儿园/亲子互动</span></td>
+  <td>100-400X · 全塑料<br>5-10片标本 · 手机支架</td>
+  <td class="price-range">¥50-120</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:70%;background:var(--accent2)"></div></div><span class="vlabel">月搜 8-12万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1.5-2.5亿/年 · 送礼驱动</span>
+  </td>
+  <td>苏康迪、晨光、得力</td>
+</tr>
+<tr>
+  <td><strong>探索级（6-10岁）</strong><br><span style="font-size:11px;color:var(--text-tertiary);">小学生/科学兴趣</span></td>
+  <td>40-600X · 金属+塑料<br>15-30片标本 · 实验工具包</td>
+  <td class="price-range">¥100-250</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:100%;background:var(--danger)"></div></div><span class="vlabel">月搜 12-18万 🔥</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 2-3.5亿/年 · 最大子品类</span>
+  </td>
+  <td>晨光、凤凰、得力、苏康迪</td>
+</tr>
+<tr>
+  <td><strong>进阶级（10-14岁）</strong><br><span style="font-size:11px;color:var(--text-tertiary);">初中衔接/竞赛预备</span></td>
+  <td>40-1200X · 全金属<br>50+标本 · 油镜·双目可选</td>
+  <td class="price-range">¥250-600</td>
+  <td><span class="badge badge-green">⭐4/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:40%;background:var(--accent3)"></div></div><span class="vlabel">月搜 3-5万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1-2亿/年 · 品质敏感</span>
+  </td>
+  <td>凤凰、麦克奥迪</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>重点切入</strong>：探索级（6-10岁）¥139-199，对标晨光/苏康迪但走"科学品牌"路线</li>
+    <li><strong>差异化</strong>：配套独家"标本片盲盒"，每月发行新标本片（耗材模式），提升复购</li>
+    <li><strong>内容营销</strong>：抖音/小红书"给孩子第一台显微镜"话题，5-6月六一送礼峰值</li>
+    <li><strong>套装策略</strong>：基础套装(镜+10片标本)+ 进阶套装(镜+30片+工具包) + 豪华套装(镜+50片+双目+手机支架)，阶梯价格提升客单价</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 6. 金相/偏光显微镜 ==================== -->
+<div class="sub-cat-section" id="sub6">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">6</div>
+  <h3>金相/偏光显微镜</h3>
+  <span class="tag tag-low">专业小众 · 月搜 <5万</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">类型</span>：正置金相 / 倒置金相 / 透射偏光 / 反射偏光</span>
+    <span class="p-item"><span class="p-key">放大倍数</span>：50-500X / 50-1000X</span>
+    <span class="p-item"><span class="p-key">光源</span>：反射LED / 卤素灯 / 汞灯(荧光)</span>
+    <span class="p-item"><span class="p-key">功能</span>：明场 / 暗场 / 偏光 / DIC微分干涉</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>工业金相级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">材料分析/金属检测</span></td>
+  <td>50-1000X · 反射LED<br>正置/倒置 · 明场+暗场</td>
+  <td class="price-range">¥3000-20000</td>
+  <td><span class="badge badge-red">⭐2/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:15%;background:var(--text-tertiary)"></div></div><span class="vlabel">月搜 1-2万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.5-1亿/年 · B2B为主</span>
+  </td>
+  <td>舜宇、奥林巴斯、蔡司</td>
+</tr>
+<tr>
+  <td><strong>偏光检测级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">岩矿/晶体/纤维分析</span></td>
+  <td>40-600X · 透射偏光<br>正交偏光 · 勃氏镜</td>
+  <td class="price-range">¥2000-15000</td>
+  <td><span class="badge badge-red">⭐2/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:10%;background:var(--text-tertiary)"></div></div><span class="vlabel">月搜 0.5-1万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.3-0.6亿/年 · 高度专业</span>
+  </td>
+  <td>蔡司、徕卡、奥林巴斯</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>⚠️ 不建议电商主攻</strong>：金相/偏光属B2B专业市场，电商占比极低（<5%），多为线下招投标采购</li>
+    <li><strong>可做</strong>：工业金相入门款 ¥3000-5000，作为产品线完整性的"品牌旗舰"，提升品牌专业形象</li>
+    <li><strong>优先级</strong>：最低。建议所有消费级产品线成熟后再考虑</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 7. 便携袖珍显微镜 ==================== -->
+<div class="sub-cat-section" id="sub7">
+<div class="sub-cat-header" onclick="this.parentElement.classList.toggle('open')">
+  <div class="idx">7</div>
+  <h3>便携袖珍显微镜</h3>
+  <span class="tag tag-hot">高增长 · 月搜40万+ 🚀</span>
+  <span class="arrow" style="font-size:14px;">▼</span>
+</div>
+<div class="sub-cat-body">
+
+<div class="params-callout">
+  <div class="p-title">📐 核心细分参数</div>
+  <div class="p-grid">
+    <span class="p-item"><span class="p-key">形态</span>：笔式 / 钥匙扣 / 折叠式 / 手机夹式</span>
+    <span class="p-item"><span class="p-key">放大倍数</span>：60X / 100X / 120X / 180X / 250X</span>
+    <span class="p-item"><span class="p-key">照明</span>：无灯 / LED白光 / LED+UV双光源</span>
+    <span class="p-item"><span class="p-key">供电</span>：纽扣电池 / AAA电池 / USB充电</span>
+    <span class="p-item"><span class="p-key">镜片</span>：树脂 / 光学玻璃 / 多层镀膜</span>
+  </div>
+</div>
+
+<table>
+<thead><tr>
+  <th style="width:20%">二级子类</th>
+  <th style="width:18%">核心参数</th>
+  <th style="width:10%">价格区间</th>
+  <th style="width:10%">电商适配</th>
+  <th style="width:22%">市场体量参考</th>
+  <th style="width:20%">代表品牌</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><strong>笔式/钥匙扣级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">随身观察/冲动消费</span></td>
+  <td>60-120X · 无灯<br>树脂镜片 · 纽扣电池</td>
+  <td class="price-range">¥15-40</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:80%;background:var(--accent2)"></div></div><span class="vlabel">月搜 15-20万 🔥</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.8-1.5亿/年 · 走量款</span>
+  </td>
+  <td>肯高、Carson、白牌</td>
+</tr>
+<tr>
+  <td><strong>LED手持级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">户外观察/珠宝鉴定</span></td>
+  <td>60-180X · LED+UV<br>光学玻璃 · AAA电池</td>
+  <td class="price-range">¥30-100</td>
+  <td><span class="badge badge-green">⭐5/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:100%;background:var(--danger)"></div></div><span class="vlabel">月搜 18-25万 🔥🔥</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 1.5-2.5亿/年 · 最大子类</span>
+  </td>
+  <td>Carson、Jiusion、得力</td>
+</tr>
+<tr>
+  <td><strong>手机夹式</strong><br><span style="font-size:11px;color:var(--text-tertiary);">手机微距摄影</span></td>
+  <td>200-250X · 手机夹<br>多层镀膜 · 无需电池</td>
+  <td class="price-range">¥20-80</td>
+  <td><span class="badge badge-green">⭐4/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:40%;background:var(--accent5)"></div></div><span class="vlabel">月搜 5-8万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.5-1亿/年 · 加速增长</span>
+  </td>
+  <td>Apexel、Moment</td>
+</tr>
+<tr>
+  <td><strong>专业袖珍级</strong><br><span style="font-size:11px;color:var(--text-tertiary);">宝石鉴定/收藏</span></td>
+  <td>30-100X · 三层镀膜<br>光学玻璃 · 三叠设计</td>
+  <td class="price-range">¥100-400</td>
+  <td><span class="badge badge-yellow">⭐3/5</span></td>
+  <td>
+    <div class="volume-bar"><div class="vbar"><div class="vfill" style="width:25%;background:var(--accent3)"></div></div><span class="vlabel">月搜 2-4万</span></div>
+    <span style="font-size:11px;color:var(--text-tertiary);">GMV: 0.3-0.6亿/年 · 专业人群</span>
+  </td>
+  <td>蔡司、宜视宝、BelOMO</td>
+</tr>
+</tbody></table>
+
+<div class="analysis-box">
+  <h4>🎯 星微光学切入建议</h4>
+  <ul>
+    <li><strong>双线策略</strong>：LED手持级走量(¥39-69) + 专业袖珍级树品牌(¥149-249)</li>
+    <li><strong>LED手持级</strong>：定位"每人一个的口袋显微镜"，强调光学玻璃+多层镀膜区别于白牌树脂镜片</li>
+    <li><strong>内容爆款潜力</strong>：笔式/钥匙扣体积小、视觉冲击力大，极适合短视频"挑战用60元显微镜能看到什么"</li>
+    <li><strong>配套</strong>：手机夹式与WiFi显微镜形成"无线微距生态"，一个APP管所有设备</li>
+    <li><strong>竞争</strong>：低端白牌多但毛利高(成本10-15元卖30-60元)，星微以"光学品质"差异化完全可以获取溢价</li>
+  </ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 拓展策略总结 ==================== -->
+<section id="strategy" style="margin-top:40px;">
+<h2 style="font-size:20px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">⭐ 显微镜赛道 · 星微光学拓展优先级</h2>
+
+<div class="strategy-grid">
+  <div class="strategy-card" style="border-left-color:var(--danger);">
+    <h4>🥇 P0 · 立即主攻</h4>
+    <ul>
+      <li><strong>数码LCD 4.3"</strong> — ¥189-269 · 月搜15-20万 · GMV 2-3亿</li>
+      <li><strong>WiFi无线显微镜</strong> — ¥169-259 · 蓝海增速>50%</li>
+      <li><strong>便携LED手持</strong> — ¥39-69 · 月搜18-25万 · 走量引流</li>
+    </ul>
+  </div>
+  <div class="strategy-card" style="border-left-color:var(--accent3);">
+    <h4>🥈 P1 · 重点跟进</h4>
+    <ul>
+      <li><strong>儿童探索级</strong> — ¥139-199 · 月搜12-18万 · 六一/送礼</li>
+      <li><strong>标准学生级</strong> — ¥350-600 · 月搜20-25万 · 中考刚需</li>
+      <li><strong>手机夹式</strong> — ¥29-59 · 与WiFi显微镜生态联动</li>
+    </ul>
+  </div>
+  <div class="strategy-card" style="border-left-color:var(--accent5);">
+    <h4>🥉 P2 · 中期布局</h4>
+    <ul>
+      <li><strong>体视工具级</strong> — ¥600-1000 · 电子维修/DIY场景</li>
+      <li><strong>入门学生级</strong> — ¥120-200 · 低价走量完善产品线</li>
+      <li><strong>专业袖珍级</strong> — ¥149-249 · 提升品牌调性</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+</div>
+
 <footer>
-  <p>🔬 星微光学 · 光学产品电商拓展调研报告 v1.0</p>
-  <p style="margin-top:6px;"><a href="https://github.com/zxb20262026/optical-product-research" target="_blank">GitHub</a> · Made with ⚡️ by 小马哥</p>
+  <p>🔬 星微光学 · 显微镜赛道深度下钻 | 数据来源：京东搜索建议API + Amazon Best Sellers · 2026年6月</p>
+  <p style="margin-top:6px;color:var(--text-tertiary);font-size:11px;">※ 月搜索量级为基于京东联想词数+行业经验估算，非平台官方数据。GMV为推算值，实际以天猫生意参谋/京东商智为准。</p>
+  <p style="margin-top:8px;"><a href="https://github.com/zxb20262026/optical-product-research" target="_blank">GitHub</a> · <a href="index.html">返回首页</a> · Made with ⚡️</p>
 </footer>
+
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('scrollTopBtn').classList.toggle('visible',window.scrollY>400)});
-// Highlight active nav
-(function(){
-  var page = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav a').forEach(function(a){
-    if(a.getAttribute('href')===page) a.classList.add('active');
-  });
-})();
 </script>
+
 </body>
 </html>
