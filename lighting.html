@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星微光学 · 照明光学 | 光学产品电商调研</title>
+<style>
+:root {
+  --bg: #0d1117; --bg-card: #161b22; --bg-card-hover: #1c2333;
+  --border: #30363d; --text: #e6edf3; --text-secondary: #8b949e;
+  --text-tertiary: #6e7681; --accent: #58a6ff; --accent2: #3fb950;
+  --accent3: #d2991d; --accent4: #f78166; --accent5: #a371f7;
+  --accent6: #79c0ff; --danger: #f85149;
+  --radius: 12px; --radius-sm: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh;
+}
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,17,23,0.94); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 10px 20px;
+  display: flex; align-items: center; gap: 8px; overflow-x: auto;
+}
+.nav-brand { font-weight: 700; font-size: 15px; white-space: nowrap;
+  background: linear-gradient(135deg, var(--accent), var(--accent5));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav a { color: var(--text-secondary); text-decoration: none; font-size: 12px;
+  white-space: nowrap; padding: 4px 8px; border-radius: 6px; transition: all 0.2s; }
+.nav a:hover { color: var(--text); background: var(--bg-card); }
+.nav a.active { color: var(--accent); background: rgba(88,166,255,0.1); }
+.nav .sep { color: var(--border); margin: 0 2px; font-size: 10px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+.hero {
+  text-align: center; padding: 40px 20px 30px;
+  background: linear-gradient(180deg, rgba(88,166,255,0.06) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border); margin-bottom: 32px;
+}
+.hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px;
+  background: linear-gradient(135deg, #58a6ff, #a371f7);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .subtitle { color: var(--text-secondary); font-size: 15px; }
+.page-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+.page-title .emoji { font-size: 28px; }
+.page-tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 600; }
+.tag-own { background: rgba(63,185,80,0.15); color: var(--accent2); }
+.tag-hot { background: rgba(248,81,73,0.15); color: var(--danger); }
+.tag-rec { background: rgba(163,113,247,0.15); color: var(--accent5); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.badge-green { background: rgba(63,185,80,0.15); color: var(--accent2); }
+.badge-yellow { background: rgba(210,153,29,0.15); color: var(--accent3); }
+.badge-red { background: rgba(248,81,73,0.15); color: var(--danger); }
+.badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+.price-range { font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 12px; color: var(--accent6); }
+.analysis-box { background: rgba(88,166,255,0.04); border: 1px solid rgba(88,166,255,0.15); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 20px; }
+.analysis-box h4 { color: var(--accent); font-size: 14px; margin-bottom: 8px; }
+.analysis-box p, .analysis-box ul { font-size: 13px; color: var(--text-secondary); margin: 4px 0; }
+.analysis-box ul { padding-left: 18px; }
+.analysis-box li { margin: 3px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13px; }
+th { text-align: left; padding: 10px 12px; background: rgba(255,255,255,0.04); border-bottom: 2px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin: 24px 0; }
+.card-link { display: block; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 16px; text-decoration: none; transition: all 0.2s; }
+.card-link:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-2px); }
+.card-link .card-emoji { font-size: 32px; margin-bottom: 8px; }
+.card-link .card-title { color: var(--text); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.card-link .card-desc { color: var(--text-secondary); font-size: 12px; }
+.card-link .card-tag { margin-top: 8px; }
+.exec-summary { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 32px; }
+.exec-summary h2 { font-size: 18px; margin-bottom: 12px; color: var(--accent2); }
+.exec-summary p { font-size: 14px; color: var(--text-secondary); }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.metric-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; text-align: center; }
+.metric-card .value { font-size: 22px; font-weight: 700; color: var(--accent); }
+.metric-card .label { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+.priority-section { margin-top: 32px; }
+.priority-section h2 { font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.priority-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.priority-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; border-left: 4px solid var(--accent2); }
+.priority-card.p2 { border-left-color: var(--accent3); }
+.priority-card.p3 { border-left-color: var(--accent5); }
+.priority-card h4 { font-size: 14px; margin-bottom: 6px; }
+.priority-card p { font-size: 13px; color: var(--text-secondary); }
+.fit-meter { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.fit-meter .bar { height: 5px; border-radius: 3px; background: var(--border); flex: 1; overflow: hidden; }
+.fit-meter .fill { height: 100%; border-radius: 3px; }
+.fit-meter .score { font-size: 13px; font-weight: 700; min-width: 28px; text-align: right; }
+.roadmap { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+.roadmap-card { flex: 1; min-width: 200px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+.roadmap-card h4 { font-size: 14px; margin-bottom: 8px; }
+.roadmap-card p { font-size: 12px; color: var(--text-secondary); }
+.roadmap-card.p1 { border-color: var(--accent2); }
+.roadmap-card.p2 { border-color: var(--accent3); }
+.roadmap-card.p3 { border-color: var(--accent5); }
+footer { text-align: center; padding: 32px 20px; border-top: 1px solid var(--border); margin-top: 48px; color: var(--text-tertiary); font-size: 12px; }
+footer a { color: var(--accent); }
+.scroll-top { position: fixed; bottom: 24px; right: 24px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 99; }
+.scroll-top.visible { opacity: 1; }
+@media (max-width: 768px) { .container { padding: 16px 12px; } table { display: block; overflow-x: auto; } .card-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">🔬 星微光学 · 调研</a>
+  <span class="sep">|</span>
+  <a href="index.html">🏠 首页</a>
+  <a href="microscope.html">🔬显微</a>
+  <a href="magnifier.html">🔍放大</a>
+  <a href="telescope.html">🔭望远</a>
+  <a href="aiming.html">🎯瞄准</a>
+  <a href="imaging.html">📷影像</a>
+  <a href="lighting.html">🔦照明</a>
+  <a href="borescope.html">🩺内窥</a>
+  <a href="measurement.html">📏测量</a>
+  <a href="protection.html">👓防护</a>
+  <a href="accessories.html">⚙️配件</a>
+</nav>
+<div class="container">
+  <div class="page-title">
+    <span class="emoji">🔦</span>
+    照明光学
+    <span class="page-tag tag-rec">推荐</span>
+  </div>
+  <p style="color:var(--text-secondary);font-size:15px;margin-bottom:24px;">手电筒 & 头灯 — 户外照明刚需，万亿户外赛道入口</p>
+  <table>
+<thead><tr><th style="width:18%">细分品类</th><th style="width:35%">说明</th><th style="width:12%">价格区间</th><th style="width:15%">电商适配度</th></tr></thead>
+<tbody>
+<tr><td><strong>EDC手电筒</strong></td><td>随身小巧高流明，1000-3000lm，战术/日常携带，品牌溢价空间大</td><td class="price-range">¥50-500</td><td><span class="badge badge-green">⭐5/5 极佳</span></td></tr>
+<tr><td><strong>户外头灯</strong></td><td>徒步/露营/夜跑，轻量+长续航+红光模式，运动场景</td><td class="price-range">¥30-200</td><td><span class="badge badge-green">⭐5/5 极佳</span></td></tr>
+<tr><td><strong>USB充电手电筒</strong></td><td>多件装家庭应急，Victoper式多件装策略，走量</td><td class="price-range">¥30-100</td><td><span class="badge badge-green">⭐5/5 极佳</span></td></tr>
+<tr><td><strong>紫外/验钞灯</strong></td><td>365nm UV，防伪检测/矿石荧光/宠物检测，小众高毛利</td><td class="price-range">¥20-100</td><td><span class="badge badge-yellow">⭐3/5 细分</span></td></tr>
+<tr><td><strong>工作灯/摄影灯</strong></td><td>COB泛光，维修/摄影补光用，专业场景</td><td class="price-range">¥80-400</td><td><span class="badge badge-yellow">⭐3/5 中等</span></td></tr>
+</tbody></table>
+<div class="analysis-box"><h4>🎯 星微光学适配建议</h4><p>照明光学是<strong>"光学"品牌名最容易自然延伸的非传统品类</strong>。Amazon Flashlights Best Seller常年热卖，Victoper多件装策略霸榜：</p><ul><li><strong>切入点</strong>：EDC随身手电筒 ¥80-200，强调"光学透镜+高透光率"，用光学技术降维</li><li><strong>品牌逻辑</strong>："星微光学 → 精密光学透镜 → 高光效手电"叙事通顺</li><li><strong>套装策略</strong>：家庭应急多件装（参考Victoper 2-pack ¥67），走量引流</li><li><strong>户外场景</strong>：头灯结合"望远+照明"户外套装，提升客单价</li></ul></div>
+</div>
+<footer>
+  <p>🔬 星微光学 · 光学产品电商拓展调研报告 v1.0</p>
+  <p style="margin-top:6px;"><a href="https://github.com/zxb20262026/optical-product-research" target="_blank">GitHub</a> · Made with ⚡️ by 小马哥</p>
+</footer>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('scrollTopBtn').classList.toggle('visible',window.scrollY>400)});
+// Highlight active nav
+(function(){
+  var page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav a').forEach(function(a){
+    if(a.getAttribute('href')===page) a.classList.add('active');
+  });
+})();
+</script>
+</body>
+</html>
